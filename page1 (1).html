@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 2 - HTML, CSS, JavaScript</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f4f4;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    /* Flexbox + Grid layout */
+    .layout {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    nav {
+      flex: 1;
+      min-width: 150px;
+      background: #007bff;
+      color: white;
+      padding: 10px;
+    }
+
+    main {
+      flex: 3;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      padding: 10px;
+      background: #e9ecef;
+    }
+
+    .grid-box {
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* To-Do List */
+    .todo {
+      max-width: 400px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #d1ecf1;
+      margin-top: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background: #bee5eb;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>1. Contact Form</h2>
+  <form id="contactForm">
+    <label>Name:</label>
+    <input type="text" id="name" required />
+
+    <label>Email:</label>
+    <input type="email" id="email" required />
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2>2. Responsive Layout with Flexbox & Grid</h2>
+  <div class="layout">
+    <nav>Navigation</nav>
+    <main>
+      <div class="grid-box">Content 1</div>
+      <div class="grid-box">Content 2</div>
+      <div class="grid-box">Content 3</div>
+    </main>
+  </div>
+
+  <h2>3. Dynamic To-Do List</h2>
+  <div class="todo">
+    <input type="text" id="taskInput" placeholder="Enter task" />
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    // Form Validation
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+      if (name === '' || !emailPattern.test(email)) {
+        alert("Please enter a valid name and email.");
+        e.preventDefault();
+      }
+    });
+
+    // To-Do List
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const task = taskInput.value.trim();
+
+      if (task !== "") {
+        const li = document.createElement('li');
+        li.textContent = task;
+        li.onclick = () => li.remove();
+        document.getElementById('taskList').appendChild(li);
+        taskInput.value = "";
+      }
+    }
+  </script>
+
+</body>
+</html>
